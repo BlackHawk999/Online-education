@@ -10,7 +10,7 @@
             носителей языка
           </p>
           <div class="intro-buttons-wrapper">
-            <button class="intro-btn">Попробовать бесплатно</button>
+            <div class="intro-btn"><button-comp :title="title" :paddings="paddings"/></div>
             <div class="play-btn-wrapper">
               <button class="intro-btn-play">
                 <svg
@@ -39,7 +39,18 @@
 </template>
 
 <script>
-export default {};
+import ButtonComp from "./ButtonComp.vue";
+export default {
+  components: {
+    ButtonComp,
+  },
+  data() {
+    return {
+      title: "Попробовать бесплатно",
+      paddings: '18px 28px'
+    };
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -80,26 +91,7 @@ export default {};
     align-items: center;
   }
   &-btn {
-    font-family: Overpass;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 18px;
-    line-height: 24px;
-    text-align: center;
-    color: #ffffff;
-    padding: 18px 27px;
     margin-right: 32px;
-    background: #78258d;
-    border: 1px solid #78258d;
-    border-radius: 8px;
-    outline: none;
-    cursor: pointer;
-    transition: all 0.3s;
-
-    &:hover {
-      color: #78258d;
-      background-color: #ffffff;
-    }
   }
   &-btn-play {
     width: 60px;

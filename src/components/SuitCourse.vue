@@ -11,7 +11,9 @@
             <b>Language to go </b>подойдет всем, кто хочет за короткий срок
             качественно изменить свою жизнь, освоив иностранный язык.
           </p>
-          <button class="who-suits-btn">Попробовать бесплатно</button>
+          <div class="who-suits-btn">
+            <button-comp :title="title" :paddings="paddings" />
+          </div>
         </div>
         <div class="who-suits-info">
           <who-suit-card
@@ -29,13 +31,17 @@
 </template>
 
 <script>
+import ButtonComp from "./ButtonComp.vue";
 import WhoSuitCard from "./WhoSuitCard.vue";
 export default {
   components: {
     WhoSuitCard,
+    ButtonComp,
   },
   data() {
     return {
+      title: "Попробовать бесплатно",
+      paddings: "18px 28px",
       suits: [
         {
           imgUrl: "presentation.svg",
@@ -123,26 +129,6 @@ export default {
     background-clip: text;
     margin-top: 27px;
     margin-bottom: 40px;
-  }
-  &-btn {
-    width: 70%;
-    font-family: Overpass;
-    font-weight: 600;
-    font-size: 18px;
-    line-height: 24px;
-    text-align: center;
-    color: #ffffff;
-    padding: 18px 28px;
-    background: #78258d;
-    border: 1px solid #78258d;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: 0.3s all;
-
-    &:hover {
-      background-color: #ffffff;
-      color: #78258d;
-    }
   }
 }
 </style>

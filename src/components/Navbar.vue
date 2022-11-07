@@ -13,14 +13,24 @@
             <router-link to="#" class="link">Еще</router-link>
           </div>
         </div>
-        <button class="navbar-button">Войти</button>
-      </div> 
+        <div class="navbar-btn">
+          <button-comp :title="title" />
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+import ButtonComp from "./ButtonComp.vue";
+export default {
+  components: { ButtonComp },
+  data() {
+    return {
+      title: "Войти",
+    };
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -58,6 +68,7 @@ export default {};
     flex-direction: row;
 
     .link {
+      position: relative;
       font-family: Overpass;
       font-style: normal;
       font-weight: 600;
@@ -66,26 +77,37 @@ export default {};
       color: #333333;
       margin-right: 0;
       text-decoration: none;
+      overflow: hidden;
+      z-index: 1;
+      transition: 0.3s all;
 
       &:not(:last-child) {
         margin-right: 45px;
       }
+
+      &:hover {
+        animation: shaking-links 0.3s infinite;
+        color: #78258d;
+      }
+
+      @keyframes shaking-links {
+        0% {
+          transform: translate(0, 0) rotate(0deg);
+        }
+        25% {
+          transform: translate(5px, 5px) rotate(5deg);
+        }
+        50% {
+          transform: translate(0, 0) rotate(0eg);
+        }
+        75% {
+          transform: translate(-5px, 5px) rotate(-5deg);
+        }
+        100% {
+          transform: translate(0, 0) rotate(0deg);
+        }
+      }
     }
-  }
-  &-button {
-    font-family: Overpass;
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 24px;
-    text-align: center;
-    letter-spacing: 0.01em;
-    padding: 12px 18px;
-    color: #ffffff;
-    background: #78258d;
-    border-radius: 8px;
-    border: none;
-    outline: none;
-    cursor: pointer;
   }
 }
 </style>
