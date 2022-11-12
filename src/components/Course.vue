@@ -1,48 +1,54 @@
 <template>
-  <div class="course">
+  <div class="course" :style="{'background-color': color}">
     <div class="course-flag">
-      <img src="@/assets/images/german.svg" alt="" />
+      <img :src="require(`@/assets/images/${imgUrl}`)" alt="" />
     </div>
     <div class="course-info">
-      <h5 class="course-title">Немецкий для начального уровня</h5>
+      <h5 class="course-title">{{ title }}</h5>
       <div class="course-time-wrapper">
-        <p class="course-time">Длительность:<strong> 45 часов</strong></p>
-        <p class="course-time">Модулей:<strong> 3</strong></p>
+        <p class="course-time">{{ duration }}</p>
+        <p class="course-time">{{ modules }}</p>
       </div>
       <div class="course-detail">
-        <p class="course-more">
-          <span>Узнать подробнее</span>
-          <svg
-            width="25"
-            height="24"
-            viewBox="0 0 25 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M5.5 12H19.5"
-              stroke="#8E49A0"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-            <path
-              d="M12.5 5L19.5 12L12.5 19"
-              stroke="#8E49A0"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
-        </p>
-        <p class="course-price">От 6520 Р</p>
+        <div class="course-more">
+          <span class="course-more__content">Узнать подробнее</span>
+          <div class="course-more__icon"></div>
+        </div>
+        <p class="course-price">От {{ price }} Р</p>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    title:{
+      type: String,
+      required: true,
+    },
+    imgUrl:{
+      type: String,
+      required: true,
+    },
+    duration:{
+      type: String,
+      required: true,
+    },
+    modules:{
+      type: String,
+      required: true,
+    },
+    price:{
+      type: Number,
+      required: true,
+    },
+    color:{
+      type: String,
+      required: true,
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>
@@ -50,7 +56,6 @@ export default {};
   display: flex;
   flex-direction: column;
   padding: 40px 40px 45px 40px;
-  background: #def1ff;
   border-radius: 10px;
 
   &-flag {
@@ -97,7 +102,13 @@ export default {};
     align-items: center;
     cursor: pointer;
 
-    span {
+    &:hover {
+      .course-more__icon {
+        width: 30px;
+      }
+    }
+
+    &__content {
       font-family: Overpass;
       font-style: normal;
       font-weight: 600;
@@ -107,16 +118,44 @@ export default {};
       color: #8e49a0;
       margin-right: 15px;
     }
+
+    &__icon {
+      position: relative;
+      height: 1.5px;
+      width: 15px;
+      background-color: #8e49a0;
+      transition: .3s;
+
+      &::before,
+      &::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        top: 50%;
+        width: 8px;
+        height: 1.5px;
+        background-color: #8e49a0;
+        transform-origin: right;
+      }
+
+      &:before {
+        transform: translateY(-50%) rotate(35deg);
+      }
+
+      &:after {
+        transform: translateY(-50%) rotate(-35deg);
+      }
+    }
   }
 
-    &-price {
-      font-family: Overpass;
-      font-style: normal;
-      font-weight: 700;
-      font-size: 20px;
-      line-height: 113%;
-      text-align: right;
-      color: #333333;
-    }
+  &-price {
+    font-family: Overpass;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 113%;
+    text-align: right;
+    color: #333333;
+  }
 }
 </style>

@@ -33,9 +33,11 @@ export default {
   border: 1px solid #78258d;
   outline: none;
   cursor: pointer;
+  animation: pulse 0.7s;
+  animation-delay: 2.1s, 480ms;
 
   &:hover {
-    animation: pulse 0.3s infinite;
+    animation: none;
   }
 
   @keyframes pulse {

@@ -7,13 +7,24 @@
             Курсы иностранных языков <br />
             для любого уровня
           </h2>
-          <router-link to="#" class="courses-all">Все курсы</router-link>
+          <router-link to="about-course" class="courses-all"
+            >Все курсы</router-link
+          >
         </div>
         <div class="courses-body">
           <div class="swiper-container" ref="courses-slider">
             <div class="swiper-wrapper">
               <div class="swiper-slide" v-for="item in 10" :key="item">
-                <course />
+                <course
+                  v-for="(l, idx) in courses"
+                  :key="idx"
+                  :img-url="l.imgUrl"
+                  :title="l.title"
+                  :duration="l.duration"
+                  :modules="l.modules"
+                  :price="l.price"
+                  :color="l.color"
+                />
               </div>
             </div>
           </div>
@@ -67,17 +78,43 @@ export default {
     return {
       coursesSlider: null,
       active: false,
+      courses: [
+        {
+          imgUrl: "german.svg",
+          title: "Немецкий для начального уровня",
+          duration: "Длительность: 45 часов",
+          modules: "Модулей: 3",
+          price: 6520,
+          color: "#D5E9F6",
+        },
+        {
+          imgUrl: "spain.svg",
+          title: "Испанский для среднего уровня",
+          duration: "Длительность: 45 часов",
+          modules: "Модулей: 3",
+          price: 6520,
+          color: "#EFEFFF",
+        },
+        {
+          imgUrl: "china.svg",
+          title: "Китайский для среднего уровня",
+          duration: "Длительность: 45 часов",
+          modules: "Модулей: 3",
+          price: 6520,
+          color: "#FDEDE4",
+        },
+      ],
     };
   },
   computed: {
     currentIndex() {
-      return this.coursesSlider?.realIndex || 0
-    }
+      return this.coursesSlider?.realIndex || 0;
+    },
   },
   mounted() {
     this.coursesSlider = new Swiper(this.$refs["courses-slider"], {
-      slidesPerView: 3,
-      spaceBetween: 40,
+      slidesPerView: 1,
+      spaceBetween: 30,
       navigation: {
         prevEl: this.$refs["prev-button"],
         nextEl: this.$refs["next-button"],
@@ -118,7 +155,7 @@ export default {
     if (this.coursesSlider) {
       this.coursesSlider.destroy();
     }
-  }
+  },
 };
 </script>
 
@@ -170,9 +207,12 @@ export default {
   .swiper-wrapper {
     display: flex;
     align-items: center;
+    width: 100%;
   }
   .swiper-slide {
-    min-width: 450px;
+    min-width: fit-content;
+    display: flex;
+    gap: 30px;
   }
 
   &-slider-btn {
@@ -200,7 +240,7 @@ export default {
         border: 3px solid transparent !important;
 
         svg circle {
-          fill: #BC92C6 !important;
+          fill: #bc92c6 !important;
         }
       }
 

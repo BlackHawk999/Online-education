@@ -31,8 +31,8 @@
             <div class="feedbacks-slider-btn">
               <button
                 ref="prev-button"
-                :class="[{ add: active === true }, 'border']"
-                @click="active = true"
+                class="border"
+                :disabled="currentIndex === 0"
               >
                 <svg
                   width="12"
@@ -44,11 +44,7 @@
                   <circle cx="6" cy="6" r="6" fill="#BC92C6" />
                 </svg>
               </button>
-              <button
-                ref="next-button"
-                :class="[{ add: active === false }, 'border']"
-                @click="active = false"
-              >
+              <button ref="next-button" class="border">
                 <svg
                   width="12"
                   height="12"
@@ -145,6 +141,11 @@ export default {
         },
       ],
     };
+  },
+  computed: {
+    currentIndex() {
+      return this.feedbacksSlider?.realIndex || 0;
+    },
   },
   mounted() {
     this.feedbacksSlider = new Swiper(this.$refs["feedbacks-slider"], {
@@ -269,11 +270,39 @@ export default {
     align-items: center;
     justify-content: center;
 
-    button {
+    svg {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .border {
+      width: 20px;
+      height: 20px;
+      min-width: 20px;
+      min-height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2px;
       margin-top: 60px;
       background-color: transparent;
-      border: none;
+      border: 3px solid transparent;
+      border-radius: 50%;
       cursor: pointer;
+
+      &:disabled {
+        cursor: not-allowed;
+        border: 3px solid transparent !important;
+
+        svg circle {
+          fill: #bc92c6 !important;
+        }
+      }
+
+      &:hover {
+        border: 3px solid #78258d;
+      }
 
       svg {
         width: 100%;
@@ -281,14 +310,8 @@ export default {
         object-fit: contain;
       }
 
-      &.border.add {
-        padding: 5px;
-        border: 3px solid #78258d;
-        border-radius: 50%;
-
-        svg path {
-          fill: #78258d !important;
-        }
+      svg circle {
+        fill: #78258d;
       }
     }
   }
