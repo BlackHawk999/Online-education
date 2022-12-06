@@ -2,7 +2,7 @@
   <div class="full-course">
     <div class="container">
       <div class="full-course-wrapper">
-        <div class="full-course-crumbs">
+        <!-- <div class="full-course-crumbs">
           <router-link class="crumb-link" to="/" exact-active-class="active"
             >Главная</router-link
           >
@@ -13,7 +13,13 @@
             exact-active-class="active"
             >Курсы</router-link
           >
-        </div>
+        </div> -->
+        <bread-crumbs
+          v-for="c in crumbs"
+          :key="c.link"
+          :link="c.link"
+          :path="c.path"
+        />
         <h2 class="full-course-title">Курсы</h2>
         <div class="full-course-languages">
           <button
@@ -91,13 +97,16 @@
 </template>
 
 <script>
+import BreadCrumbs from "../BreadCrumbs.vue";
 import Course from "../Course.vue";
 export default {
   components: {
     Course,
+    BreadCrumbs,
   },
   data() {
     return {
+      crumbs: [{ link: "Курсы", path: "about-course" }],
       showAll: true,
       selectedBtn: "",
       buttons: ["Все", "Китайский", "Английский", "Немецкий", "Испанский"],

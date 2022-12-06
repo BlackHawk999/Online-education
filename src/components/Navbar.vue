@@ -3,14 +3,25 @@
     <div class="container">
       <div class="navbar-wrapper">
         <div class="navbar-child">
-          <div class="navbar-logo">
+          <router-link to="/" class="navbar-logo">
             <img src="@/assets/images/logo.svg" alt="" />
-          </div>
+          </router-link>
           <div class="navbar-links">
-            <router-link to="#" class="link">Курсы</router-link>
-            <router-link to="#" class="link">О нас</router-link>
-            <router-link to="#" class="link">Блог</router-link>
-            <router-link to="#" class="link">Еще</router-link>
+            <router-link
+              to="/about-course"
+              exact-active-class="active"
+              class="link"
+              >Курсы</router-link
+            >
+            <router-link to="#" exact-active-class="active" class="link"
+              >О нас</router-link
+            >
+            <router-link to="#" exact-active-class="active" class="link"
+              >Блог</router-link
+            >
+            <router-link to="#" exact-active-class="active" class="link"
+              >Еще</router-link
+            >
           </div>
         </div>
         <div class="navbar-btn">
@@ -77,35 +88,33 @@ export default {
       color: #333333;
       margin-right: 0;
       text-decoration: none;
-      overflow: hidden;
       z-index: 1;
       transition: 0.3s all;
+
+      &::after {
+        content: "";
+        width: 100%;
+        height: 2px;
+        position: absolute;
+        right: 0;
+        left: 0;
+        bottom: -10px;
+        background-color: transparent;
+      }
+
+      &.active {
+        color: #78258d;
+        &::after {
+          background-color: #78258d;
+        }
+      }
 
       &:not(:last-child) {
         margin-right: 45px;
       }
 
       &:hover {
-        animation: shaking-links 0.3s infinite;
         color: #78258d;
-      }
-
-      @keyframes shaking-links {
-        0% {
-          transform: translate(0, 0) rotate(0deg);
-        }
-        25% {
-          transform: translate(5px, 5px) rotate(5deg);
-        }
-        50% {
-          transform: translate(0, 0) rotate(0eg);
-        }
-        75% {
-          transform: translate(-5px, 5px) rotate(-5deg);
-        }
-        100% {
-          transform: translate(0, 0) rotate(0deg);
-        }
       }
     }
   }
